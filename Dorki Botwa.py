@@ -4,14 +4,14 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import re
 import requests
 
-BOT_TOKEN = "5749379453:AAFskhUczPEzx9K8au617DDYwtXR9CGahYM"
+BOT_TOKEN = "Your Bot token here!"
 
 USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
 
 def start(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text="Hi, I'm a search bot. Send me a query to get started!")
 
-edmemesIDs = [5944430353]
+edmemesIDs = [admin IDs here(comma separated)]
 
 def search(update, context):
     query = update.message.text
@@ -19,7 +19,7 @@ def search(update, context):
     user_id = update.effective_user.id
 
     if user_id not in edmemesIDs:
-        context.bot.send_message(chat_id=chat_id, text="Sorry, you are not authorized to use this bot.")
+        context.bot.send_message(chat_id=chat_id, text="Sorry, you are not authorized to use this bot. Contact @FullNoob_xD to get your access!")
         return
 
     with requests.Session() as session:
@@ -47,10 +47,7 @@ def search(update, context):
 
 if __name__ == '__main__':
     updater = Updater(BOT_TOKEN, use_context=True)
-
     dp = updater.dispatcher
-
-
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(MessageHandler(Filters.text & (~Filters.command), search))
     print("Bot is UP!")
